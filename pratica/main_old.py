@@ -27,18 +27,23 @@ cedulas = {
     '100':5
 }
 
-def main():
-    cabecalho()
-    contaAutenticada = autenticacao()
+while True:
+    print("***************************************************************")
+    print("************* Caixa Eletrônico ********************************")
+    print("***************************************************************")
+    conta = input('Digite sua conta: ')
+    senha = input('Digite sua senha: ')
 
-    if contaAutenticada:
-        clear()
-        cabecalho()
-        
-        opcao = obter_opcao_digitada(contaAutenticada)
+    if conta in contas and senha == contas[conta]['senha']:
+        print('Bem vindo ' + contas[conta]['nome'])
+        print("1- saldo")
+        print("2- saque")
+        if contas[conta]['admin']:
+            print("10- incluir cedula")
+        opcao = input("escolha opcao: ")
         if opcao == '1':
-            print('Seu saldo eh %s' % contas[contaAutenticada]['valor'])
-        elif opcao == '10' and contas[contaAutenticada]['admin']:
+            print('Seu saldo eh %s' % contas[conta]['valor'])
+        elif opcao == '10' and contas[conta]['admin']:
             valor_digitado = input("digite a qnt de cedulas: ")
             cedula_dinheiro = input("digite a cedula a ser incluida: ")
             cedulas[cedula_dinheiro] +=  int(valor_digitado)
@@ -69,38 +74,8 @@ def main():
                 print(cedulas_usuario)
     else:
         print('Conta ou Senha Invalida')
-
-def autenticacao():
-    conta = input('Digite sua conta: ')
-    senha = input('Digite sua senha: ')
-
-    if conta in contas and senha == contas[conta]['senha']:
-        return conta
-    else:
-        return False
-
-def obter_opcao_digitada(contaAutenticada):
-    print('Bem vindo ' + contas[contaAutenticada]['nome'])
-    print("1- saldo")
-    print("2- saque")
-    if contas[contaAutenticada]['admin']:
-        print("10- incluir cedula")
-    return input("escolha opcao: ")
-
-def  clear():
+    
+    input('\nPressione <Enter> Para Continuar...')
     #os.system('cls' if os.nome == 'nt' else 'clear')
     os.system('cls')
     os.system('clear')
-
-def cabecalho():
-    print("***************************************************************")
-    print("************* Caixa Eletronico ********************************")
-    print("***************************************************************")
-
-while True:
-    main()
-
-    input('\nPressione <Enter> Para Continuar...')
-    clear()
-
-    
