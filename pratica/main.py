@@ -1,7 +1,11 @@
 import operacoes
 import utils
+from variaveis import cedulas
+from file import carregar_informacoes_banco
 
 def main():
+    carregar_informacoes_banco()
+    print(cedulas)
     utils.cabecalho()
     contaAutenticada = operacoes.autenticacao()
 
